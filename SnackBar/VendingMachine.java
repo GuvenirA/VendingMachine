@@ -90,7 +90,7 @@ public class VendingMachine extends JPanel
       trayFull = vendor.makeSale();
       
       
-      changeString=vendor.getChangeString();   //added to find the number of coins
+      changeString = vendor.getChangeString();   //added to find the number of coins
       int change = vendor.getChange();
       
       

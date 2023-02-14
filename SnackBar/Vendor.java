@@ -14,7 +14,7 @@ public class Vendor
     private int stock;
     private int deposit;
     private int change;
-    //make a private static double variable called totalSales that has an initial value of 0
+    private static double totalSales = 0.0;
 
 
     /**
@@ -22,49 +22,50 @@ public class Vendor
      * @param price the price of a single item in cents (int)
      * @param stock number of items to place in stock (int)
      */
-    public Vendor(int price, int stock)
-    {
-        //You need to complete this using this. notation
+    public Vendor(int price, int stock){
+        this.price = price;
+        this.stock = stock;
     }
+
 
     /**
      * Sets the quantity of items in stock.
      * @param qty number of items to place in stock (int)
      */
-
-
-    public void setStock(int stock)
+    public void setStock(int stock) //done? wierd different in teachers parameters, look later
     {
         //You need to complete this using this. notation
+        stock = qty;
     }
+
 
     /**
      * Returns the number of items currently in stock.
      * @return number of items currently in stock (int)
      */
-    public int getStock()
-    {
-        //complete this
+    public int getStock(){
+        return stock;
     }
+
 
     /**
      * Adds a specified amount (in cents) to the
      * deposited amount.
      * @param number of cents to add to the deposit (int)
      */
-    public void addMoney(int d)
-    {
-        //You need to complete this using mutator
+    public void addMoney(int number){
+        deposit += number;
     }
+
 
     /**
      * Returns the currently deposited amount (in cents).
      * @return number of cents in the current deposit (int)
      */
-    public int getDeposit()
-    {
+    public int getDeposit(){
         return deposit;
     }
+
 
     /**
      * Implements a sale.  If there are items in stock and
@@ -75,10 +76,19 @@ public class Vendor
      * change) and returns false.
      * @return true for a successful sale, false otherwise (boolean)
      */
-    public boolean makeSale()
-    {
-        //create the makesale method
+    public boolean makeSale(){
+        if((stock > 0) && (deposit >= price)){
+            stock--;
+            totalSales += (price / 100.0);
+            change = deposit - price;
+            deposit = 0;
+            return true;
+        }else{
+            change = deposit;
+            return false;
+        }
     }
+
 
     /**
      * Returns and zeroes out the amount of change (from
@@ -87,32 +97,33 @@ public class Vendor
      */
     public int getChange()
     {
-        int c=change;
-        change=0;
+        int c = change;
+        change = 0;
         return c;
     }
 
-    public String getChangeString()
-    {
-        //From Ethan: create a get method that returns the amount and type of coins that should be returned by the machine
-        /*
-        note that the coin class has a .getQuarters(), a .getDimes() etc etc (use the coin class!)
-        */
-        
-
-        String changeString="";
-
+    /**
+     * Returns the amount of change in quarters, dimes, nickels, and pennies
+     *
+     * @return change in quarters, dimes, nickels, and pennies
+     */
+    public String getChangeString(){
+        String changeString = "";
+        Coins amount = new Coins(change);
+        changeString = amount.getQuarters() + "q + " + amount.getDimes() + "d + " +
+                amount.getNickles() + "n + " + amount.getPennies() + "p";
         return changeString;
     }
-    
+
     /**
-    * Returns the total number of sales and resets the total number of sales to 0
+    * Returns the total dollars of sales and resets the total dollars of sales to 0
     * Hint: use a temp variable
     *
-    * @return number of sales
+    * @return dollars of sales
     */
-    public static double getTotalSales()
-    {
-        //complete this
+    public static double getTotalSales(){
+        double temp = totalSales;
+        totalSales = 0.0;
+        return temp;
     }
 }

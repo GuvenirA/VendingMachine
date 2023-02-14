@@ -35,13 +35,13 @@ public class Coins {
 	public Coins(int c)
 	{
 		cents = c;           //sets cents
-		quarters=c/25;       //integer division for # of coins
-		c-=quarters*25;      //decrease change total and repeat
-		dimes=c/10;
-		c-=dimes*10;
-		nickles=c/5;
-		c-=nickles*5;
-		pennies=c;            //whatever is left over
+		quarters = c / 25;       //integer division for # of coins
+		c -= quarters * 25;      //decrease change total and repeat
+		dimes = c / 10;
+		c -= dimes * 10;
+		nickles = c / 5;
+		c -= nickles * 5;
+		pennies = c;            //whatever is left over
 	}
 	
 	public int getQuarters()
